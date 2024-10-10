@@ -7,17 +7,16 @@ public class Dish extends DishType {
 	protected String dishName; // sipas llojit emrin perkates te menuse
 	protected double dishPrize;// kostoje e cdo menuje
 	protected String dishDescription;
-	private int dishItemsPerType;// numri i menuve per kategori
 
 	public Dish() {
 		dishName = "dishName";
 		dishDescription = "dish_Description";
 		dishPrize = 456.55;
 		dishId = 153;
-		dishItemsPerType = 6;
+
 	}
 
-	public Dish(int dishId,String dishType, String dishName, String dishDescription, double dishPrize, 
+	public Dish(int dishId, String dishName, String dishDescription, double dishPrize, String dishType,
 			int dishItemsPerType) {
 		super();
 		this.dishId = dishId;
@@ -28,7 +27,8 @@ public class Dish extends DishType {
 	}
 
 	private TreeMap<String, String> afishoEmerMenu() {
-		System.out.println("Kategoria për çdo menu janë:");
+		System.out.println("Afisho menutë sipas kategorive:");
+	    System.out.println();
 		TreeMap<String, String> menuPerKategori = new TreeMap<String, String>();
 		menuPerKategori.put("Appetizer", "Kimchi");
 		menuPerKategori.put("Appetizer", "Salmon Tataki");
@@ -252,8 +252,8 @@ public class Dish extends DishType {
 
 		Set<Map.Entry<String, String>> set = menuPerKategori.entrySet();
 		for (Map.Entry<String, String> vl : set) {
-			System.out.print(vl.getValue() + " --> ");
-			System.out.println(vl.getKey());
+			System.out.print("Menu:"+" "+vl.getValue() + " -- ");
+			System.out.println("Kategoria:"+" "+vl.getKey());
 		}
 		System.out.println();
 		return menuPerKategori;
@@ -265,7 +265,7 @@ public class Dish extends DishType {
 	}
 
 	private TreeMap<String, String> afishoPershkrimMenu() {
-		System.out.println("Ingredientet apo Pershkrimet perkatese per çdo menu");
+		System.out.println('\n'+"Menutë sipas përshkrimit të Ingridienteve"+'\n');
 		TreeMap<String, String> ingredientMenu = new TreeMap<String, String>();
 		ingredientMenu.put("(ska pershkrim)", "Kimchi");
 		ingredientMenu.put("(ska pershkrim)", "Salmon Tataki");
@@ -292,9 +292,9 @@ public class Dish extends DishType {
 		ingredientMenu.put("4 cope", "Wonton Crispy");
 		ingredientMenu.put("(ska pershkrim)", "Spring Roll me Mish Pate");
 		ingredientMenu.put("4 cope", "Gyoza me Perime");
-		ingredientMenu.put("Bun", "Bun Vici");
-		ingredientMenu.put("Bun", "Bun Pule");
-		ingredientMenu.put("Bun", "Bun(Kuleçë) me mish te Patës");
+		ingredientMenu.put("ska pershkrim", "Bun Vici");
+		ingredientMenu.put("ska pershkrim", "Bun Pule");
+		ingredientMenu.put("ska pershkrim", "Bun(Kuleçë) me mish te Patës");
 		ingredientMenu.put("Supë me Karkaleca Deti", "Tom Yum");
 		ingredientMenu.put("ska pershkrim", "Supë me Fruta Deti");
 		ingredientMenu.put("ska pershkrim", "Wonton Supë");
@@ -371,7 +371,7 @@ public class Dish extends DishType {
 		ingredientMenu.put("Serviret gjysem_Patë", "Patë Crispy_1");
 		ingredientMenu.put("Serviret Çerek_Pate", "Patë Crispy_2");
 		ingredientMenu.put("(ska pershkrim)", "Donburi me Mish Pate");
-		ingredientMenu.put("Omletet", "Tamago");
+		ingredientMenu.put("Omelet", "Tamago");
 		ingredientMenu.put("Tuna", "Maguro");
 		ingredientMenu.put("Shrimp", "Karkalecë Deti");
 		ingredientMenu.put("Levrek", "Suzuki");
@@ -409,14 +409,14 @@ public class Dish extends DishType {
 				"California Roll");
 		ingredientMenu.put("6 copë;Kani,Tranguj/Mbështjellë me Salmon ,Levrek,Tuna dhe Avocado", "Rainbow Roll");
 		ingredientMenu.put(
-				"6 copë;Quinoa,Goma Wakame(alga Deti me Susam),Shparguj,Karrotë,Arra të Pjekura/Mbështjellur me Avocado,",
+				"6 copë;Quinoa,Goma Wakame(alga Deti me Susam),Shparguj,Karrotë,Arra të Pjekura/Mbështjellur me Avocado",
 				"Quinoa Avocado Roll");
 		ingredientMenu.put(
 				"5 copë;Salmon,Tranguj,Krem Djathi/Mbështjellur me Salmon të Tymosur,Salcë Ponzu,Salcë Teriyaki & Salcë Sriracha",
 				"Two Way Salmon Roll");
 		ingredientMenu.put("8 copë;Sallatë e gjelbërt,Tranguj,Salmon,Krem Djathi/Mbështjellur me Susam",
 				"Philadelphia Roll");
-		ingredientMenu.put("5 copë;Ngjalë,Avocado,Tranguj,Krem Djathi,Salcë Djegëse/Mbështjellur me Karkalec♪7 Deti",
+		ingredientMenu.put("5 copë;Ngjalë,Avocado,Tranguj,Krem Djathi,Salcë Djegëse/Mbështjellur me Karkalecë Deti",
 				"Tiger Roll");
 		ingredientMenu.put("6 copë;Tuna ,Tartar/Mbështjellur me Avocado", "Spicy Maguro Avocado");
 		ingredientMenu.put("8 copë;Avocado,Karrota,Kastravec,Shparguj,Sallate Jeshile/Mbështjellë me Susam",
@@ -496,7 +496,7 @@ public class Dish extends DishType {
 		ingredientMenu.put("2 Wonton Crispy,6 qofte me Mish Pule,Noodles me Perime,2 Banane te skuqura,Leng frutash",
 				"Kids Bento");//
 		ingredientMenu.put("(ska pershkrim)", "Kappa Roll");
-		ingredientMenu.put("Tuna", "Maguro Roll ");
+		ingredientMenu.put("Peshk Tuna", "Maguro Roll ");
 		ingredientMenu.put("Tofu,Takuan/Mbështjellur me Nori", "Tofu Takuan Roll");
 		ingredientMenu.put("Karkalecë", "Ebi Roll");
 		ingredientMenu.put("Surimi", "Kani Roll");
@@ -543,8 +543,8 @@ public class Dish extends DishType {
 
 		Set<Map.Entry<String, String>> set = ingredientMenu.entrySet();
 		for (Map.Entry<String, String> v : set) {
-			System.out.print(v.getValue() + "  ");
-			System.out.println(v.getKey());
+			System.out.print("Dish:"+" "+v.getValue() + "  ");
+			System.out.println("Përshkrim Ingridientesh:"+v.getKey());
 		}
 		System.out.println();
 		return ingredientMenu;
@@ -556,7 +556,7 @@ public class Dish extends DishType {
 	}
 
 	private TreeMap<String, Double> afishoCmimiMenu() {
-		System.out.println("Kosto në LEK për çdo Menu");
+		System.out.println("Menutë sipas çmimit përkatës"+'\n');
 		TreeMap<String, Double> cmimiMenu = new TreeMap<String, Double>();
 		cmimiMenu.put("Kimchi", 690.00);
 		cmimiMenu.put("Salmon Tataki", 960.00);
@@ -779,8 +779,8 @@ public class Dish extends DishType {
 		cmimiMenu.put("San Pellegrino", 370.00);
 		Set<Map.Entry<String, Double>> st = cmimiMenu.entrySet();
 		for (Map.Entry<String, Double> value : st) {
-			System.out.print(value.getKey() + "    ");
-			System.out.println(value.getValue());
+			System.out.print("Menu"+" "+value.getKey() + "    ");
+			System.out.println("Çmimi:"+value.getValue());
 		}
 		System.out.println();
 		return cmimiMenu;
@@ -792,7 +792,7 @@ public class Dish extends DishType {
 	}
 
 	private TreeMap<Integer, String> afishoIdMenu() {
-		System.out.println("Id perkatese e cdo menuje ne bazen e te dhenave:");
+		System.out.println("Menutë sipas Id perkatese ne bazen e te dhenave:"+'\n');
 		TreeMap<Integer, String> Idmenu = new TreeMap<Integer, String>();
 		Idmenu.put(101, "Kimchi");
 		Idmenu.put(102, "Salmon Tataki");
@@ -968,7 +968,7 @@ public class Dish extends DishType {
 		Idmenu.put(2105, "Bento Menu 5");
 		Idmenu.put(2106, "Bento Menu 6");
 		Idmenu.put(2107, "Bento Menu Vegjetariane");
-		Idmenu.put(2108, "Kids Bento");//
+		Idmenu.put(2108, "Kids Bento");
 		Idmenu.put(2201, "Kappa Roll");
 		Idmenu.put(2202, "Maguro Roll ");
 		Idmenu.put(2203, "Tofu Takuan Roll");
@@ -1016,8 +1016,8 @@ public class Dish extends DishType {
 
 		Set<Map.Entry<Integer, String>> set = Idmenu.entrySet();
 		for (Map.Entry<Integer, String> vl : set) {
-			System.out.print(vl.getKey() + "   ");
-			System.out.println(vl.getValue());
+			System.out.print("DishId  "+vl.getKey() + "   ");
+			System.out.println("DishName  "+vl.getValue());
 		}
 		System.out.println();
 		return Idmenu;
@@ -1029,51 +1029,7 @@ public class Dish extends DishType {
 
 	}
 
-	private TreeMap<String, Integer> afishoNrMenuKategori() {
-		System.out.println("Për çdo kategori --- numri i menuve");
-		TreeMap<String, Integer> menuPerKategori = new TreeMap<String, Integer>();
-		menuPerKategori.put("Appetizer", 18);
-		menuPerKategori.put("Dim Sum", 6);
-		menuPerKategori.put("Bun", 3);
-		menuPerKategori.put("Supat", 7);
-		menuPerKategori.put("Ramen", 3);
-		menuPerKategori.put("Sallatat", 9);
-		menuPerKategori.put("Donburi", 3);
-		menuPerKategori.put("Noodles", 14);
-		menuPerKategori.put("Oriz", 9);
-		menuPerKategori.put("Perimet", 3);
-		menuPerKategori.put("Poke Bowl", 2);
-		menuPerKategori.put("Pulë", 10);
-		menuPerKategori.put("Ushqimi i Detit", 7);
-		menuPerKategori.put("Mishi i Viçit", 6);
-		menuPerKategori.put("Patë", 3);
-		menuPerKategori.put("Nigiri", 11);
-		menuPerKategori.put("Sashimi Set", 5);
-		menuPerKategori.put("Special Rolls", 20);
-		menuPerKategori.put("Cooked Rolls", 18);
-		menuPerKategori.put("Set Menu", 9);
-		menuPerKategori.put("Bento Menu", 8);
-		menuPerKategori.put("Sushi Roll", 11);
-		menuPerKategori.put("Salcat", 12);
-		menuPerKategori.put("Desert", 5);
-		menuPerKategori.put("Birrë", 3);
-		menuPerKategori.put("Sake & Wine", 2);
-		menuPerKategori.put("Pijet e Ftohta", 10);
-
-		Set<Map.Entry<String, Integer>> set = menuPerKategori.entrySet();
-		for (Map.Entry<String, Integer> i : set) {
-			System.out.print(i.getKey() + "  ");
-			System.out.println(i.getValue());
-		}
-		System.out.println();
-		return menuPerKategori;
-	}
-
-	public int getDishItemsPerType() {
-		afishoNrMenuKategori();
-		return dishItemsPerType;
-	}
-
 	public void porositOnline() {
-	}
+System.out.println("Shto në shportë");	
+}
 }

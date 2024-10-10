@@ -5,14 +5,14 @@ import java.util.*;
 public abstract class DishType {
 
 	protected String dishType;
-
+	protected int dishItemsPerType;
 	public DishType() {
-    dishType = "dishType";
+		dishType = "dishType";
 	}
 
-	public DishType(String dishType) {
+	public DishType(String dishType,int dishItemsPerType) {
 		this.dishType = dishType;
-
+        this.dishItemsPerType = dishItemsPerType;
 	}
 
 	private Map<Integer, String> afishoMenu() {
@@ -61,6 +61,51 @@ public abstract class DishType {
 		afishoMenu();
 		return dishType;
 	}
+	private TreeMap<String, Integer> afishoNrMenuKategori() {
+		System.out.println("Për çdo kategori --- numri i menuve");
+		TreeMap<String, Integer> menuPerKategori = new TreeMap<String, Integer>();
+		menuPerKategori.put("Appetizer", 19);
+		menuPerKategori.put("Dim Sum", 6);
+		menuPerKategori.put("Bun", 3);
+		menuPerKategori.put("Supat", 7);
+		menuPerKategori.put("Ramen", 3);
+		menuPerKategori.put("Sallatat", 9);
+		menuPerKategori.put("Donburi", 3);
+		menuPerKategori.put("Noodles", 14);
+		menuPerKategori.put("Oriz", 9);
+		menuPerKategori.put("Perimet", 3);
+		menuPerKategori.put("Poke Bowl", 2);
+		menuPerKategori.put("Pulë", 10);
+		menuPerKategori.put("Ushqimi i Detit", 7);
+		menuPerKategori.put("Mishi i Viçit", 6);
+		menuPerKategori.put("Patë", 3);
+		menuPerKategori.put("Nigiri", 11);
+		menuPerKategori.put("Sashimi Set", 5);
+		menuPerKategori.put("Special Rolls", 20);
+		menuPerKategori.put("Cooked Rolls", 18);
+		menuPerKategori.put("Set Menu", 9);
+		menuPerKategori.put("Bento Menu", 8);
+		menuPerKategori.put("Sushi Roll", 11);
+		menuPerKategori.put("Salcat", 12);
+		menuPerKategori.put("Desert", 5);
+		menuPerKategori.put("Birrë", 3);
+		menuPerKategori.put("Sake & Wine", 2);
+		menuPerKategori.put("Pijet e Ftohta", 10);
 
+		Set<Map.Entry<String, Integer>> set = menuPerKategori.entrySet();
+		for (Map.Entry<String, Integer> i : set) {
+			System.out.print("Kategoria e menuse:"+i.getKey() + "  ");
+			System.out.println("Numri i menuve:"+i.getValue());
+		}
+		System.out.println();
+		return menuPerKategori;
+	}
+
+	public int getDishItemsPerType() {
+		afishoNrMenuKategori();
+		return dishItemsPerType;
+	}
+
+	
 	public abstract void porositOnline();// selecto menune ose menute e preferuara
 }

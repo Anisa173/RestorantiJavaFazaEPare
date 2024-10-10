@@ -6,9 +6,14 @@ public class Orders extends Dish {
 
 	private int OrderId;
 	private double OrderPrize;
-	private String Order_status;
 	private int orderItems;
-
+	private String orderTimeC;// C-Confirmed -kur shtypim butoni "Konfirmo" apo "Submit"
+	private String orderProcessed;// Kur klienti merr porosine ne dorë dhe skanohet kuponi ,porosia kalon ne
+									// statusin processed
+	private String Order_status;
+	
+	
+	
 	public Orders() {
 		OrderId = 211466;
 		OrderPrize = 3660.55;
@@ -16,17 +21,23 @@ public class Orders extends Dish {
 		Order_status = "Processed";
 	}
 
-	public Orders(int OrderId, double OrderPrize, String Order_status, int orderItems, int dishId, String dishType,
-			String dishName, String dishDescription, double dishPrize, int dishItemsPerType) {
+	public Orders( int OrderId,double OrderPrize,int orderItems,String orderTimeC, String orderProcessed,String Order_status,
+			 String dishType,int dishItemsPerType, int dishId, String dishName, String dishDescription, double dishPrize)
+			 {
 		super();
 		this.OrderId = OrderId;
 		this.OrderPrize = OrderPrize;
-		this.Order_status = Order_status;
 		this.orderItems = orderItems;
-	}
+		this.orderTimeC = orderTimeC;
+		this.orderProcessed = orderProcessed;
+        this.Order_status = Order_status;
+			 }
 
 	private TreeMap<Integer, String> afishoNoItemsPerOrder() {
-		System.out.println("Artikujt per çdo porosi  gjate nje intervali te caktuar kohor jane:");
+		System.out.println("Numri i Artikujve per çdo porosi  gjate nje intervali te caktuar kohor jane:"+'\n');// supozojme pergjate
+																									// nje jave , 6 dite
+																									// - nje dite e
+																									// javes pushim
 		TreeMap<Integer, String> orders = new TreeMap<Integer, String>();
 		orders.put(5, "Karkalecë Deti Crispy");
 		orders.put(3, "Salmon & Suzuki Carpaccio");
@@ -92,10 +103,10 @@ public class Orders extends Dish {
 		orders.put(4, "Bulgogi Pulë në Stilin Korean");
 		orders.put(8, "Oktapod djegës me Perime");
 		orders.put(4, "Sushi Queen");
-		
+        
 		Set<Map.Entry<Integer, String>> set = orders.entrySet();
 		for (Map.Entry<Integer, String> value : set) {
-			System.out.println(value.getKey() + " | " + value.getValue());
+			System.out.println("Nr i artikujve"+" "+value.getKey() + " | "+value.getValue());
 
 		}
 		return orders;
@@ -107,7 +118,7 @@ public class Orders extends Dish {
 	}
 
 	private HashMap<Double, String> afishoOrderCost() {
-		System.out.println("Kostot per çdo Porosi");
+		System.out.println("Porosia sipas Kostos"+'\n');
 		HashMap<Double, String> orderPrize = new HashMap<Double, String>();
 		orderPrize.put(4800.00, "Karkalecë Deti Crispy  5 x 960.00");
 		orderPrize.put(3300.00, "Salmon & Suzuki Carpaccio  3 x 1100");
@@ -189,7 +200,7 @@ public class Orders extends Dish {
 	}
 
 	private TreeMap<Integer, String> afishoidPorosi() {
-		System.out.println("Id-të e çdo Porosie të kryer");
+		System.out.println("Porosia sipas IdPorosi"+'\n');
 		TreeMap<Integer, String> orderId = new TreeMap<Integer, String>();
 		orderId.put(5109, " 5  Karkalecë Deti Crispy     4800.00");
 		orderId.put(3117, " 3  Salmon & Suzuki Carpaccio      3300.00");
@@ -258,8 +269,8 @@ public class Orders extends Dish {
 
 		Set<Map.Entry<Integer, String>> set = orderId.entrySet();
 		for (Map.Entry<Integer, String> i : set) {
-			System.out.print(i.getValue() + " -- ");
-			System.out.println(i.getKey());
+			System.out.print(i.getValue() + "  ");
+			System.out.println("OrderId"+" "+i.getKey());
 		}
 		System.out.println();
 
@@ -272,7 +283,7 @@ public class Orders extends Dish {
 	}
 
 	private TreeMap<String, String> afishoPorosistatus() {
-		System.out.println("Statusi i çdo Porosie të Gjeneruar");// porosi te gjeneruara gjate nje intervali kohe 'te
+		System.out.println("Statusi i çdo Porosie të Gjeneruar"+'\n');// porosi te gjeneruara gjate nje intervali kohe 'te
 																	// shkurter' prej disa ore 'delivery' , hasim te
 																	// tria statuset
 																	// 'processed';'pending';'cancelled'~reagimi ne nje
@@ -345,7 +356,7 @@ public class Orders extends Dish {
 
 		Set<Map.Entry<String, String>> set = orderStatus.entrySet();
 		for (Map.Entry<String, String> f : set) {
-			System.out.println(f.getKey() + "  -  " + f.getValue());
+			System.out.println(f.getKey() + "  |  " + f.getValue());
 		}
 		System.out.println();
 		return orderStatus;
@@ -354,6 +365,172 @@ public class Orders extends Dish {
 	public String getOrder_status() {
 		afishoPorosistatus();
 		return Order_status;
+	}
+
+	private TreeMap<String, String> afishoTime() {
+		System.out.println("Çasti i kryerjes se porosise nga klienti"+'\n');
+		TreeMap<String, String> orderTime = new TreeMap<String, String>();
+		orderTime.put("8:30|18.03.2023 ", " 5  Karkalecë Deti Crispy     4800.00");
+		orderTime.put("9:00|18.03.2023 ", " 3  Salmon & Suzuki Carpaccio      3300.00");
+		orderTime.put("10:35|18.03.2023 ", " 6  Pulë Kaarage me Parmesan      4560.00");
+		orderTime.put("11:00|18.03.2023 ", " 5  Tempura Perimesh      3800.00");
+		orderTime.put("13:00|18.03.2023", "  10 Bun Vici      6200.00");
+		orderTime.put("16:30|18.03.2023 ", " 2  Pad Thai      1660.00");
+		orderTime.put("16:35|18.03.2023 ", " 5  Bun(Kuleçë) me mish te Patës     3450.00");
+		orderTime.put("19:00|18.03.2023 ", " 12  Tartar Salmoni me Tartuf     14880.00");
+		orderTime.put("11:35|19.03.2023 ", " 7  Spring Roll me Mish Pate    4830.00");
+		orderTime.put("8:00|19.03.2023 ", " 15 Sallatë Aziatike    10500.00");
+		orderTime.put("8:35|19.03.2023 ", " 10  Ramen - Karkalec   12900.00");
+		orderTime.put("10:00|19.03.2023 ", " 10  Sallatë Kani dhe Tranguj     8300.00");
+		orderTime.put("13:00|19.03.2023 ", " 5  Sallatë Sashimi     5500.00");
+		orderTime.put("13.30|19.03.2023 ", " 3  Sallatë Aziatike me Karkaleca Deti Crispy    3720.00");
+		orderTime.put("15:35|19.03.2023 ", " 4  Sallatë Quinoa me Salmon    4960.00");
+		orderTime.put("15:40|19.03.2023 ", " 3  Sallatë me fruta të Detit    3720.00");
+		orderTime.put("18:30|19.03.2023 ", " 8  Singapore Noodles me salcë Këri     8800.00");
+		orderTime.put("19:45|19.03.2023 ", " 5  Donburi me ngjalë     6900.00");
+		orderTime.put("12:00|20.03.2023 ", " 20  Udon me Mish Viçi dhe Salcë të Hudhrës së Zezë     2200.00");
+		orderTime.put("12:30|20.03.2023 ", " 5  Udon Bulgogi Korean Mish Viçi      5250.00");
+		orderTime.put("14:03|20.03.2023 ", " 5  Noodles të Stilit Tajlandez me Karkalecë Deti     6900.00");
+		orderTime.put("14:05|20.03.2023 ", " 2  Oriz i Stilit Tajladez me Ananas     1660.00");
+		orderTime.put("11:05|20.03.2023 ", " 2  Oriz me Vezë të fërguara      1380.00 ");
+		orderTime.put("10:00|20.03.2023 ", " 2  Tempura Mix     2900.00");
+		orderTime.put("21:00|20.03.2023 ", " 50  Salmon Tajlandez me Curry     71000.00");
+		orderTime.put("18:00|20.03.2023 ", " 5  Canadian Roll      5150.00");
+		orderTime.put("7:45|21.03.2023 ", " 2  Bento Menu 5     4242.00");
+		orderTime.put("8:20|21.03.2023 ", " 4  Bento Menu 1     5720.00");
+		orderTime.put("17:00|21.03.2023 ", " 5  Philadelphia Roll      5150.00");
+		orderTime.put("9:35|20.03.2023 ", " 3  Kids Bento     3390.00");
+		orderTime.put("9:25|21.03.2023 ", " 5  Sushi King     15650.00");
+		orderTime.put("20:00|21.03.2023 ", " 5  Hot Sushi Plate     15650.00");
+		orderTime.put("8:00|22.03.2023 ", " 5  Sushi Prince 2     19100.00");
+		orderTime.put("9:00|22.03.2023 ", " 6  Bento Menu 2      8160.00");
+		orderTime.put("10:05|22.03.2023 ", " 5  Fish&Crips Roll     5850.00");
+		orderTime.put("10:10|22.03.2023 ", " 3  Chinese Hot Sauce     1500.00");
+		orderTime.put("13:08|18.03.2023 ", " 4  Coca - Cola Zero      880.00");
+		orderTime.put("13:05|18.03.2023 ", " 6  Akullore e Fërguar me Bajame      3300.00");
+		orderTime.put("10:38|18.03.02023", " 6  Sake 0.18      7200.00");
+		orderTime.put("9:40|20.03.2023 ", " 3  Sprite      660.00");
+		orderTime.put("9:26|21.03.2023 ", " 3  Acqua Panna - 0.75ml      1110.00");
+		orderTime.put("12:05|22.03.2023 ", " 4  Truffle Mayonnaise      2000.00");
+		orderTime.put("12:42|22.03.2023 ", " 2  BUN'utella      1380.00");
+		orderTime.put("8:20|23.03.2023 ", " 3  Sweet Chili Sos      1500.00");
+		orderTime.put("12:35|22.03.2023 ", " 6  Tofu Takuan Roll      4320.00");
+		orderTime.put("15:00|22.03.2023 ", " 2  ABC Sushi Moriawase      3500.00");
+		orderTime.put("13:30|22.03.2023 ", " 3  Yuzu Special Roll      4020.00");
+		orderTime.put("12:00|22.03.2023 ", " 2  Nigiri Mix_III      5100.00");
+		orderTime.put("15:30|22.03.2023 ", " 5  Mish Viçi Djegëse dhe Kërpudha      6000.00");
+		orderTime.put("12:40|22.03.2023 ", " 5  Salmon në Skarë me Salcë Teriyaki     7900.00");
+		orderTime.put("19:15|22.03.2023 ", " 5  Bulgogi Pulë në Stilin Korean      5100.00");
+		orderTime.put("18:05|22.03.2023 ", " 2  Oriz me Perime      1240.00");
+		orderTime.put("8:17|23.03.2023 ", " 4  Oriz me Këri dhe Mish Viçi      3600.00");
+		orderTime.put("8:25|23.03.2023 ", " 3  Donburi me mish te Pates      3720.00");
+		orderTime.put("9:00|23.03.2023 ", " 4  Supë me Fruta Deti      3280.00");
+		orderTime.put("12:00|23.03.2023 ", " 3  Tartar Salmoni me Tartuf      3720.00");
+		orderTime.put("12:05|23.03.2023 ", " 3  Sallatë Aziatike      2100.00");
+		orderTime.put("20:30|22.03.2023 ", " 5  Sallatë Aziatike me Karkaleca Deti Crispy      6200.00");
+		orderTime.put("14:30|23.03.2023 ", " 4  Wonton Korean      2760.00");
+		orderTime.put("20:20|23.03.2023 ", " 2  Qofte me Karkalecë Deti      1520.00");
+		orderTime.put("15:40|23.03.2023 ", " 6  Noodles të Stilit Tajlandez me Karkalecë Deti      8280.00");
+		orderTime.put("19:35|23.03.2023 ", " 4  Bulgogi Pulë në Stilin Korean       4080.00");
+		orderTime.put("18:00|23.03.2023 ", " 8  Oktapod djegës me Perime      12320.00");
+		orderTime.put("22:00|23.03.2023 ", " 4  Sushi Queen      10320.00");
+
+		Set<Map.Entry<String, String>> set = orderTime.entrySet();
+		for (Map.Entry<String, String> i : set) {
+			System.out.print(i.getValue() + " -- ");
+			System.out.println(i.getKey());
+		}
+		System.out.println();
+
+		return orderTime;
+	}
+
+	public String getOrderTimeC() {
+		afishoTime();
+		return orderTimeC;
+	}
+
+	private TreeMap<String, String> afishoTimeProcessed() {
+		System.out.println("Çasti kur porosia kalon nga 'Pending' në 'Processed' "+'\n');
+		TreeMap<String, String> PorderTime = new TreeMap<String, String>();
+		PorderTime.put("12:00|18.03.2023 ", " 5  Karkalecë Deti Crispy     4800.00");
+		PorderTime.put("13:30|18.03.2023 ", " 3  Salmon & Suzuki Carpaccio      3300.00");
+		PorderTime.put("13:30|18.03.2023 ", " 6  Pulë Kaarage me Parmesan      4560.00");
+		PorderTime.put("12:30|18.03.2023 ", " 5  Tempura Perimesh      3800.00");
+		PorderTime.put("14:30|18.03.2023", "  10 Bun Vici      6200.00");
+		PorderTime.put(null, " 2  Pad Thai      1660.00");
+		PorderTime.put("17:00|18.03.2023 ", " 5  Bun(Kuleçë) me mish te Patës     3450.00");
+		PorderTime.put("20:25|18.03.2023 ", " 12  Tartar Salmoni me Tartuf     14880.00");
+		PorderTime.put("12:00|19.03.2023 ", " 7  Spring Roll me Mish Pate    4830.00");
+		PorderTime.put("12:00|19.03.2023 ", " 15 Sallatë Aziatike    10500.00");
+		PorderTime.put("12:00|19.03.2023 ", " 10  Ramen - Karkalec   12900.00");
+		PorderTime.put("11:40|19.03.2023 ", " 10  Sallatë Kani dhe Tranguj     8300.00");
+		PorderTime.put("14:10|19.03.2023 ", " 5  Sallatë Sashimi     5500.00");
+		PorderTime.put("14.20|19.03.2023 ", " 3  Sallatë Aziatike me Karkaleca Deti Crispy    3720.00");
+		PorderTime.put("16:00|19.03.2023 ", " 4  Sallatë Quinoa me Salmon    4960.00");
+		PorderTime.put("16:00|19.03.2023 ", " 3  Sallatë me fruta të Detit    3720.00");
+		PorderTime.put("19:10|19.03.2023 ", " 8  Singapore Noodles me salcë Këri     8800.00");
+		PorderTime.put("20:30|19.03.2023 ", " 5  Donburi me ngjalë     6900.00");
+		PorderTime.put("13:30|20.03.2023 ", " 20  Udon me Mish Viçi dhe Salcë të Hudhrës së Zezë     2200.00");
+		PorderTime.put("13:00|20.03.2023 ", " 5  Udon Bulgogi Korean Mish Viçi      5250.00");
+		PorderTime.put("14:30|20.03.2023 ", " 5  Noodles të Stilit Tajlandez me Karkalecë Deti     6900.00");
+		PorderTime.put("14:30|20.03.2023 ", " 2  Oriz i Stilit Tajladez me Ananas     1660.00");
+		PorderTime.put("12:00|20.03.2023 ", " 2  Oriz me Vezë të fërguara      1380.00 ");
+		PorderTime.put("12:00|20.03.2023 ", " 2  Tempura Mix     2900.00");
+		PorderTime.put("22:10|20.03.2023 ", " 50  Salmon Tajlandez me Curry     71000.00");
+		PorderTime.put("19:00|20.03.2023 ", " 5  Canadian Roll      5150.00");
+		PorderTime.put("11:50|21.03.2023 ", " 2  Bento Menu 5     4242.00");
+		PorderTime.put("12:00|21.03.2023 ", " 4  Bento Menu 1     5720.00");
+		PorderTime.put("17:45|21.03.2023 ", " 5  Philadelphia Roll      5150.00");
+		PorderTime.put("12:00|20.03.2023 ", " 3  Kids Bento     3390.00");
+		PorderTime.put("12:30|21.03.2023 ", " 5  Sushi King     15650.00");
+		PorderTime.put("21:00|21.03.2023 ", " 5  Hot Sushi Plate     15650.00");
+		PorderTime.put("12:00|22.03.2023 ", " 5  Sushi Prince 2     19100.00");
+		PorderTime.put("12:20|22.03.2023 ", " 6  Bento Menu 2      8160.00");
+		PorderTime.put("12:25|22.03.2023 ", " 5  Fish&Crips Roll     5850.00");
+		PorderTime.put("12:30|22.03.2023 ", " 3  Chinese Hot Sauce     1500.00");
+		PorderTime.put("14:30|18.03.2023 ", " 4  Coca - Cola Zero      880.00");
+		PorderTime.put("14:30|18.03.2023 ", " 6  Akullore e Fërguar me Bajame      3300.00");
+		PorderTime.put("13:00|18.03.02023", " 6  Sake 0.18      7200.00");
+		PorderTime.put("11:45|20.03.2023 ", " 3  Sprite      660.00");
+		PorderTime.put("12:30|21.03.2023 ", " 3  Acqua Panna - 0.75ml      1110.00");
+		PorderTime.put("13:05|22.03.2023 ", " 4  Truffle Mayonnaise      2000.00");
+		PorderTime.put("14:15|22.03.2023 ", " 2  BUN'utella      1380.00");
+		PorderTime.put("12:10|23.03.2023 ", " 3  Sweet Chili Sos      1500.00");
+		PorderTime.put("13:00|22.03.2023 ", " 6  Tofu Takuan Roll      4320.00");
+		PorderTime.put("16:00|22.03.2023 ", " 2  ABC Sushi Moriawase      3500.00");
+		PorderTime.put("14:40|22.03.2023 ", " 3  Yuzu Special Roll      4020.00");
+		PorderTime.put("12:40|22.03.2023 ", " 2  Nigiri Mix_III      5100.00");
+		PorderTime.put("16:40|22.03.2023 ", " 5  Mish Viçi Djegëse dhe Kërpudha      6000.00");
+		PorderTime.put("13:20|22.03.2023 ", " 5  Salmon në Skarë me Salcë Teriyaki     7900.00");
+		PorderTime.put("20:20|22.03.2023 ", " 5  Bulgogi Pulë në Stilin Korean      5100.00");
+		PorderTime.put("18:55|22.03.2023 ", " 2  Oriz me Perime      1240.00");
+		PorderTime.put("12:00|23.03.2023 ", " 4  Oriz me Këri dhe Mish Viçi      3600.00");
+		PorderTime.put("12:15|23.03.2023 ", " 3  Donburi me mish te Pates      3720.00");
+		PorderTime.put("12:30|23.03.2023 ", " 4  Supë me Fruta Deti      3280.00");
+		PorderTime.put("13:10|23.03.2023 ", " 3  Tartar Salmoni me Tartuf      3720.00");
+		PorderTime.put("13:20|23.03.2023 ", " 3  Sallatë Aziatike      2100.00");
+		PorderTime.put("21:45|22.03.2023 ", " 5  Sallatë Aziatike me Karkaleca Deti Crispy      6200.00");
+		PorderTime.put("16:00|23.03.2023 ", " 4  Wonton Korean      2760.00");
+		PorderTime.put("21:00|23.03.2023 ", " 2  Qofte me Karkalecë Deti      1520.00");
+		PorderTime.put("16:00|23.03.2023 ", " 6  Noodles të Stilit Tajlandez me Karkalecë Deti      8280.00");
+		PorderTime.put("20:20|23.03.2023 ", " 4  Bulgogi Pulë në Stilin Korean       4080.00");
+		PorderTime.put("18:30|23.03.2023 ", " 8  Oktapod djegës me Perime      12320.00");
+		PorderTime.put("22:45|23.03.2023 ", " 4  Sushi Queen      10320.00");
+
+		Set<Map.Entry<String, String>> set = PorderTime.entrySet();
+		for (Map.Entry<String, String> i : set) {
+			System.out.print(i.getValue() + " -- ");
+			System.out.println(i.getKey());
+		}
+		System.out.println();
+
+		return PorderTime;
+	}
+
+	public String getOrderProcessed() {
+		afishoTimeProcessed();
+		return orderProcessed;
 	}
 
 	public void porositOnline() {
